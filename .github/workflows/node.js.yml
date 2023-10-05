@@ -17,6 +17,13 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 20
+      - name: ache Node.js dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm  # Cache the npm cache directory
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
       - run: npm ci
       - run: npm run build --if-present
       - run: npm test
@@ -27,8 +34,4 @@ jobs:
           name: my-artifacts
           path: .
     
-      #- name: Archive code coverage results
-       # uses: actions/upload-artifact@v3
-        #with:
-         # name: code-coverage-report
-          #path: output/test/code-coverage.html
+     
