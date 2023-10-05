@@ -17,6 +17,7 @@ jobs:
         
     - name: Install dependencies
       run: npm install
+      working-directory: Artifacts_Lesson/
 
     - name: Build
       run: npm run build
